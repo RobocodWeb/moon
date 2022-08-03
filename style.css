@@ -1,0 +1,75 @@
+*, *:before, *:after {  
+	border: 0;  
+	box-sizing: border-box;  
+	margin: 0;  
+	padding: 0;
+}
+body {  
+	background: #000;  
+	font-size: 16px;  
+	height: 100vh;  
+	transform-style: preserve-3d;  
+	perspective: 600px;
+}
+.earth, .moon {  
+	border-radius: 50%;  
+	overflow: hidden;  
+	z-index: 0;
+}
+.earth, .earth:before, .earth:after, .moon, .moon:before, .moon:after {  
+	position: absolute;
+}
+.earth:before, .earth:after, .moon:before, .moon:after {  
+	content: "";  
+	display: block;  
+	position: absolute;  
+	height: 100%;
+}
+.earth:before, .moon:before {  
+	border-radius: inherit;  
+	width: 100%;  
+	z-index: -1;
+}
+.earth:after, .moon:after {  
+	background-size: auto 100%;  
+	background-repeat: repeat-x;  
+	width: 400%;  
+	z-index: -2;
+}
+.earth {  
+	top: calc(50% - 10em);  
+	left: calc(50% - 10em);  
+	width: 20em;  
+	height: 20em;  
+	will-change: transform;
+}
+.earth:before {  
+	background-image: radial-gradient(100% 125% at 40% 50%, rgba(0, 0, 0, 0) 40%, black 50%), radial-gradient(100% 100% at center, rgba(40, 120, 240, 0) 47%, rgba(40, 120, 240, 0.5) 48.5%, #c2e4fa 50%);
+}
+.earth:after {  
+	animation: textureSpin 3s linear infinite;  
+	background-image: url(https://i.ibb.co/tK45vHK/earth-texture.jpg);
+}
+.moon {  
+	animation: moonOrbitX 81.966s ease-in-out infinite;  
+	width: 4em;  
+	height: 4em;  
+	transform: translateZ(0) translateX(-15em);
+}
+.moon:before {  
+	background-image: radial-gradient(100% 125% at 40% 50%, rgba(0, 0, 0, 0) 40%, black 50%);  
+	box-shadow: 0 0 0.5em inset;
+}
+.moon:after {  
+	animation: textureSpin 81s linear infinite reverse;  
+	background-image: url(https://i.ibb.co/0DJQB6Y/moon-texture.jpg);
+}
+.moon-hitbox {  
+	animation: moonOrbitZ 81.966s -20.4915s ease-in-out infinite;  
+	position: absolute;  
+	top: calc(50% - 2em);  left: calc(50% - 2em);  
+	transform: translateZ(0);
+}
+@keyframes textureSpin {  from {    transform: translateX(0);  }  to {    transform: translateX(-50%);  }}
+@keyframes moonOrbitX {  from {    transform: translateZ(0) translateX(-15em);  }  50% {    transform: translateZ(0) translateX(15em);  }  50.01% {    transform: translateZ(-1px) translateX(15em);  }  to {    transform: translateZ(-1px) translateX(-15em);  }}
+@keyframes moonOrbitZ {  from, to {    transform: translateZ(-15em);  }  50% {    transform: translateZ(15em);  }}
